@@ -1,0 +1,31 @@
+public void readTD(String TestData, String testcase) throws Exception {
+TestData=readConfigData(configFileName,"TestData",driver);
+testcase=readConfigData(configFileName,"testcase",driver);
+FileInputStream td_filepath = new FileInputStream(TestData);
+Workbook td_work==Workbook.getWorkbook(td_filepath);
+Sheet td_sheet = td_work.getSheet(0);
+if(counter==0)
+{
+for (int i = 1,j = 1; i <= td_sheet.getRows()-1; i++)
+{
+if(td_sheet.getCell(0,i).getContents().equalsIgnoreCase(testcase))
+{
+startrow = i;
+arrayList.add(td_sheet.getCell(j,i).getContents());
+testdata_value.add(td_sheet.getCell(j+1,i).getContents());
+for (int j = 0, k = startrow +1; k <= td_sheet.getRows()-1; k++)
+{
+if (td_sheet.getCell(j,k).getContents()=="")
+{
+arrayList.add(td_sheet.getCell(j+1,k).getContents());
+testdata_value.add(td_sheet.getCell(j+2,k).getContents());
+}
+}
+}
+counter++;
+}
+
+
+
+
+
